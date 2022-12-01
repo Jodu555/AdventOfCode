@@ -16,19 +16,21 @@ const final = numbers.map((subArr) => {
 });
 
 //Part 1: 72718
-// let biggest = -1;
+if (false) {
+	let biggest = -1;
 
-// final.forEach((element) => {
-// 	if (element >= biggest) {
-// 		biggest = element;
-// 		console.log('Change to', element);
-// 	}
-// });
+	final.forEach((element) => {
+		if (element >= biggest) {
+			biggest = element;
+			console.log('Change to', element);
+		}
+	});
 
-// console.log(biggest);
-
+	console.log(biggest);
+}
 //Part 2: 213089
-
-const output = final.sort((a, b) => b - a);
-
-console.log(output[0] + output[1] + output[2]);
+if (true) {
+	const topN = 3;
+	const output = final.sort((a, b) => b - a);
+	console.log(output.slice(0, topN).reduce((a, b) => a + b));
+}
