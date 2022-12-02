@@ -1,47 +1,32 @@
 const fs = require('fs');
 const data = fs.readFileSync('./src/2022/2.txt', 'utf-8').split('\r\n');
 
-const ROCK = 1;
-const PAPER = 2;
-const SCISSORS = 3;
-// Rock defeats Scissors, Scissors defeats Paper, and Paper defeats Rock
-
-function translate(v) {
-	if (typeof v == 'string') {
-		if (v === 'A' || v === 'X') return ROCK;
-		if (v === 'B' || v === 'Y') return PAPER;
-		if (v === 'C' || v === 'Z') return SCISSORS;
-	} else {
-		if (v == ROCK) return 'ROCK';
-		if (v == PAPER) return 'PAPER';
-		if (v == SCISSORS) return 'SCISSORS';
-	}
-}
-
-const out = data.map((round) => {
-	//Enenmy
-	const opp = translate(round[0]);
-	//I
-	const pro = translate(round[2]);
-	console.log('=> ', translate(pro), translate(opp));
-	if ((pro == ROCK && opp == SCISSORS) || (pro == SCISSORS && opp == PAPER) || (pro == PAPER && opp == ROCK)) {
-		//WIN The value from the item + 6 for the win
-		console.log('WIN', pro, 6);
-		return pro + 6;
-	} else if (pro === opp) {
-		//DRAW
-		console.log('DRAW', pro, opp);
-		return pro + opp;
-	} else {
-		//LOSS
-		console.log('LOSS', pro, 0);
-		return pro + 0;
-	}
-});
-
-console.log(out);
-console.log(out.reduce((a, b) => a + b));
+// const ROCK = 1;
+// const PAPER = 2;
+// const SCISSORS = 3;
+// // Rock defeats Scissors, Scissors defeats Paper, and Paper defeats Rock
 
 // 1 for Rock, 2 for Paper, and 3 for Scissors
 // 1 COL: A for Rock, B for Paper, and C for Scissors
 // 2 COL: X for Rock, Y for Paper, and Z for Scissors
+
+const lookup = {
+	'A X': [4, 3],
+	'A Y': [8, 4],
+	'A Z': [3, 8],
+	'B X': [1, 1],
+	'B Y': [5, 5],
+	'B Z': [9, 9],
+	'C X': [7, 2],
+	'C Y': [2, 6],
+	'C Z': [6, 7],
+};
+
+let points = [0, 0];
+data.map((entry) =>
+	points.map((_, i) => {
+		const result = lookup[entry][i];
+		points[i] += result;
+	})
+);
+points.map((p, i) => console.log(`Part ${i + 1}: Points: ${p}`));
