@@ -7,15 +7,23 @@ const SCISSORS = 3;
 // Rock defeats Scissors, Scissors defeats Paper, and Paper defeats Rock
 
 function translate(v) {
-	if (v === 'A' || v === 'X') return ROCK;
-	if (v === 'B' || v === 'Y') return PAPER;
-	if (v === 'C' || v === 'Z') return SCISSORS;
+	if (typeof v == 'string') {
+		if (v === 'A' || v === 'X') return ROCK;
+		if (v === 'B' || v === 'Y') return PAPER;
+		if (v === 'C' || v === 'Z') return SCISSORS;
+	} else {
+		if (v == ROCK) return 'ROCK';
+		if (v == PAPER) return 'PAPER';
+		if (v == SCISSORS) return 'SCISSORS';
+	}
 }
 
 const out = data.map((round) => {
+	//Enenmy
 	const opp = translate(round[0]);
+	//I
 	const pro = translate(round[2]);
-	console.log(opp, pro);
+	console.log('=> ', translate(pro), translate(opp));
 	if ((pro == ROCK && opp == SCISSORS) || (pro == SCISSORS && opp == PAPER) || (pro == PAPER && opp == ROCK)) {
 		//WIN The value from the item + 6 for the win
 		console.log('WIN', pro, 6);
