@@ -1,2 +1,2 @@
 const year = 2022;
-require('./' + year + '/2.js');
+require('./' + year + '/3.js');
